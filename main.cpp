@@ -21,7 +21,7 @@
 #include <mutex>
 #include <atomic>
 #include <set>
-
+#include <cstdlib>
 // ────────────────────────────────────────────────
 //  HELPER FUNCTIONS 
 // ────────────────────────────────────────────────
@@ -307,7 +307,7 @@ crow::App<crow::CORSHandler> app;
 auto& cors = app.get_middleware<crow::CORSHandler>();
 
 cors.global()
-    .origin("http://localhost:3000")                  // Allow only your Next.js dev server
+    .origin("*")                  // Allow only your Next.js dev server
     .methods("GET"_method, "OPTIONS"_method)         // GET for your requests, OPTIONS for preflight
     .headers("Content-Type", "Accept")                // Allow these common headers
     .max_age(3600);                                   // Cache preflight for 1 hour (optional but good)
@@ -437,7 +437,9 @@ for (const auto& r : top) {
 
 
 // Start the server
-app.port(8080).multithreaded().run();
+const char* port_env = std::getenv("PORT");
+int port = port_env ? std::stoi(port_env) : 8080;
+app.port(port).bindaddr("0.0.0.0").multithreaded().run();
 
 curl_global_cleanup();
 return 0;
