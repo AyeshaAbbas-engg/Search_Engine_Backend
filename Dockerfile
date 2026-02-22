@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-RUN g++ -std=c++17 -O2 -o server main.cpp \
+RUN g++ -std=c++17 -O2 -I/app -o server main.cpp \
     -lcurl -lpthread -lboost_system -lssl -lcrypto
 
 EXPOSE 8080
