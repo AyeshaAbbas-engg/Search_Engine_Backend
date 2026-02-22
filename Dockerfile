@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
+RUN chmod -R 777 Indexer/
+
 RUN g++ -std=c++17 -O2 -I/app -o server main.cpp \
     -lcurl -lpthread -lboost_system -lssl -lcrypto
 
