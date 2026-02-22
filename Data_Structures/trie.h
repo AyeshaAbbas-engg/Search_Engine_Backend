@@ -1,7 +1,7 @@
 #ifndef TRIE_H
 #define TRIE_H
 
-#include "Sorter/sorter.h"
+#include "../Sorter/sorter.h"
 #include <string>
 #include <vector>
 #include <utility> 
