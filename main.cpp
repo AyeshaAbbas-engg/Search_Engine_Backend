@@ -99,7 +99,11 @@ bool allowedByRobots(const std::string& url) {
 // ────────────────────────────────────────────────
 
 int main() {
+    std::cout << "Server starting..." << std::endl;
+    std::cout.flush();
     curl_global_init(CURL_GLOBAL_ALL);
+    std::cout << "Curl initialized" << std::endl;
+    std::cout.flush();
 
     ThreadSafeQueue urlQueue;
     HashSet visitedURLs;
