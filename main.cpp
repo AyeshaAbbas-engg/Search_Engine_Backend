@@ -104,6 +104,8 @@ int main() {
     curl_global_init(CURL_GLOBAL_ALL);
     std::cout << "Curl initialized" << std::endl;
     std::cout.flush();
+    std::cout << "Loading index..." << std::endl;
+std::cout.flush();
 
     ThreadSafeQueue urlQueue;
     HashSet visitedURLs;
@@ -127,7 +129,7 @@ const std::string seedURL = "https://en.wikipedia.org/wiki/Computer_science";
      if (s_pos != std::string::npos) cleanSeed = cleanSeed.substr(s_pos);
 
     urlQueue.push(cleanSeed);
-    const int MAX_PAGES = 70;
+    const int MAX_PAGES = 25;
     const int NUM_WORKERS = 2;
 
     bool loadedFromDisk = false;
@@ -153,7 +155,8 @@ const std::string seedURL = "https://en.wikipedia.org/wiki/Computer_science";
                 }
             }
             loadedFromDisk = true;
-            std::cout << "Index loaded successfully.\n";
+            std::cout << "Index loaded successfully." << std::endl;
+            std::cout.flush();
         }
     }
 
